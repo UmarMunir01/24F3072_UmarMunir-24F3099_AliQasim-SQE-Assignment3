@@ -1,0 +1,7 @@
+# The source repo's requirements omit several imported application packages.
+# Install this file in the project's active virtual environment after requirements.txt.
+python-dotenv>=1.0
+Markdown>=3.5
+bleach>=6.0
+Pygments>=2.17
+pytest-xdist>=3.6
