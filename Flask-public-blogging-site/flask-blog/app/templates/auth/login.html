@@ -1,0 +1,43 @@
+{% extends 'auth/base_auth.html' %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card glass-card">
+        <div class="auth-header">
+            <h2>Welcome Back! 👋</h2>
+            <p>Login to continue your blogging journey</p>
+        </div>
+        
+        <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form">
+            {{ form.hidden_tag() }}
+            
+            <div class="input-group">
+                <i class="icon">👤</i>
+                {{ form.username(class="glass-input", placeholder="Username") }}
+            </div>
+            
+            {% if form.username.errors %}
+                <div class="error-msg">{{ form.username.errors[0] }}</div>
+            {% endif %}
+            
+            <div class="input-group">
+                <i class="icon">🔒</i>
+                {{ form.password(class="glass-input", placeholder="Password") }}
+            </div>
+            
+            {% if form.password.errors %}
+                <div class="error-msg">{{ form.password.errors[0] }}</div>
+            {% endif %}
+            
+            <button type="submit" class="glass-button">
+                <span>Login</span>
+                <div class="button-glow"></div>
+            </button>
+        </form>
+        
+        <div class="auth-footer">
+            <p>Don't have an account? <a href="{{ url_for('auth.register') }}" class="link-accent">Sign up</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+case_id,description,username,password,password2,expected_valid
+REG-CSV-01,minimum valid username and password,abc,123456,123456,true
+REG-CSV-02,username below minimum,ab,123456,123456,false
+REG-CSV-03,maximum valid username,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,123456,123456,true
+REG-CSV-04,username above maximum,aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa,123456,123456,false
+REG-CSV-05,password below minimum,alice,12345,12345,false
+REG-CSV-06,minimum valid password,alice,123456,123456,true
+REG-CSV-07,password confirmation mismatch,alice,123456,654321,false

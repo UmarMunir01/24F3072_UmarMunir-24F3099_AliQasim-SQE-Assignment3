@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Blog Posts</h1>
+<div class="posts-filter">
+  <a href="{{ url_for('main.index') }}" class="{{ 'active' if view=='all' else '' }}">All</a>
+  {% if current_user.is_authenticated %}
+    <a href="{{ url_for('main.my_posts') }}" class="{{ 'active' if view=='mine' else '' }}">My posts</a>
+    <a href="{{ url_for('main.others_posts') }}" class="{{ 'active' if view=='others' else '' }}">Others' posts</a>
+  {% endif %}
+</div>
+
+<ul>
+    {% for post in posts %}
+  <article>
+    <h2 class="post-title">
+      {# show link if post is public or current user is the author #}
+      {% if (not (post.is_private | default(false))) or (current_user.is_authenticated and post.author_id == current_user.id) %}
+        <a href="{{ url_for('main.post_detail', post_id=post.id) }}">
+          {{ post.title | markdown_title }}
+        </a>
+      {% else %}
+        {{ post.title | markdown_title }}
+        <span class="badge">Private</span>
+      {% endif %}
+    </h2>
+
+    <p class="meta">
+      By {{ post.author.username }} on {{ post.timestamp.strftime('%Y-%m-%d %H:%M') }}
+      {% if post.is_private %}
+        <span class="badge">Private</span>
+      {% endif %}
+    </p>
+    <div class="excerpt">{{ post.content[:300] | markdown_to_html }}</div>
+  </article>
+{% else %}
+  <p>No posts to show.</p>
+{% endfor %}
+</ul>
+<a href="{{ url_for('main.new_post') }}">New Post</a>
+{% endblock %}
