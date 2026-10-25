@@ -26,17 +26,3 @@ python member1/run_tests.py -- -m forms
 python member1/run_tests.py --parallel
 ```
 
-The normal run is serial and uses the declared order markers. The parallel option requires pytest-xdist and does not guarantee worker completion order.
-
-## Push this member's work separately
-
-From the Flask app repository root, review the files, then stage only this folder and commit under Umar Munir's GitHub account:
-
-```powershell
-git switch -c assignment3-member1-umar
-git add member1
-git commit -m "Add Member 1 unit test automation"
-git push -u origin assignment3-member1-umar
-```
-
-
